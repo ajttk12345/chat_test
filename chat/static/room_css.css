@@ -1,0 +1,165 @@
+.talktheme
+{
+	background-color: #9bbad8;
+	padding: 4px 4px 100px 4px;
+}
+
+.talktheme .clear
+{
+	clear: both;
+}
+
+.talktheme .blank
+{
+	clear: both;
+	height: 4px;
+}
+
+.head-area{
+	text-align: center;
+	background: honeydew;
+	border-radius: 5px;
+
+	font-size: 20px;
+	padding: 1px;
+}
+.talktheme .chat-log
+{
+	height: calc(100% - 72px);
+	overflow-y: scroll;
+	font-size: 12px;
+	margin: 10px 0px 10px 0px;
+}
+
+.talktheme .chat-log .time
+{
+	font-size: 10px;
+}
+
+.talktheme .chat-log .mymsg
+{
+	float: right;
+	width: 100%;
+	margin-top: 10px;
+}
+
+.talktheme .chat-log .mymsg .time
+{
+	float: right;
+	bottom: 0;
+}
+
+.talktheme .chat-log .mymsg .a
+{
+	float: right;
+	position: relative;
+	min-height: 24px;
+	max-width: calc(100% - 64px);
+	left: 2px;
+	background-color: #ffec42;
+	border-radius: 3px;
+	z-index: 2;
+	padding: 4px 4px 0px 4px;
+	word-break: break-all;
+}
+
+.talktheme .chat-log .mymsg .b
+{
+	float: right;
+	position: relative;
+	width: 8px;
+	height: 22px;
+	background: url(./chat_balloon_yellow.right.png) no-repeat;
+	z-index: 1;
+}
+
+.talktheme .chat-log .othermsg
+{
+	float: left;
+	width: 100%;
+	margin-top: 10px;
+}
+
+.talktheme .chat-log .othermsg .profile_image
+{
+	float: left;
+	width: 40px;
+	height: 40px;
+	border-radius: 14px;
+}
+
+.talktheme .chat-log .othermsg .box
+{
+	float: left;
+	width: calc(100% - 48px);
+}
+
+.talktheme .chat-log .othermsg .box .profile_name
+{
+	font-size: 12px;
+}
+
+.talktheme .chat-log .othermsg .box .a
+{
+	float: left;
+	position: relative;
+	width: 8px;
+	height: 22px;
+	background: url(./chat_balloon_white.left.png) no-repeat;
+	z-index: 1;
+}
+
+.talktheme .chat-log .othermsg .box .b
+{
+	float: left;
+	position: relative;
+	min-height: 24px;
+	max-width: calc(100% - 64px);
+	left: -2px;
+	background-color: #ffffff;
+	border-radius: 3px;
+	z-index: 2;
+	padding: 4px 4px 0px 4px;
+	word-break: break-all;
+
+}
+
+.talktheme .chat-log .othermsg .box .time
+{
+	float: left;
+}
+
+.talktheme .send-area #chat-message-input
+{
+	float: left;
+	width: calc(100% - 68px);
+	height: 64px;
+	border-radius: 8px 0px 0px 8px;
+	margin: 0px 0px 0px 0px;
+	padding: 2px 2px 2px 2px;
+	resize: none;
+}
+
+.talktheme .send-area #chat-message-submit
+{
+	float: right;
+	width: 62px;
+	height: 68px;
+	background-color: #ffec42;
+	border-radius: 0px 8px 8px 0px;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+	text-align: center;
+	display: table;
+	cursor: pointer;
+}
+
+.talktheme .send-area #chat-message-submit p
+{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.othermsg .mymsg{
+	margin-top: 10px;
+}

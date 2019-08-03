@@ -1,0 +1,116 @@
+﻿ul {
+	list-style-type: none;
+	padding-left: 80px;
+	margin: 0;
+}
+
+li {
+	display: block;
+	position: relative;
+	padding: 20px 0px;
+}
+
+/* Radio Button
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+input[type=radio] {
+	position: absolute;
+	visibility: hidden;
+}
+
+label { 
+	cursor: pointer; 
+	font-weight: 400;
+}
+
+.check {
+	width: 30px; height: 30px;
+	position: absolute;
+	border-radius: 50%;
+	transition: transform .6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+/* Reset */
+input#mode1 ~ .check { 
+	transform: translate(-50px, -25px); 
+	background: rgb(254, 232, 195);
+}
+input#mode2 ~ .check { 
+	transform: translate(-50px, -83px); 
+	background: #fcae2c;
+	box-shadow: 0 6px 12px #C98500;
+}
+
+/* Radio Input #1 */
+input#mode1:checked ~ .check { transform: translate(-50px, 33px); }
+
+/* Radio Input #2  */
+input#mode2:checked ~ .check { transform: translate(-50px, -25px); }
+
+
+
+
+
+/*   radio button: category   */
+.radiobtn_categ {
+	display: block;
+	max-width: 180px;
+	margin: 5px auto 0;
+	position: relative;
+	text-align: left;
+	margin-top: 10px;
+}
+.radiobtn_categ label {
+	display: block;
+	background: #fee8c3;
+	color: #444;
+	border-radius: 5px;
+	padding: 10px 20px;
+	border: 2px solid #fdd591;
+	margin-bottom: 5px;
+	cursor: pointer;
+}
+.radiobtn_categ label:after, .radiobtn_categ label:before {
+	content: "";
+	position: absolute;
+	right: 11px;
+	top: 11px;
+	width: 20px;
+	height: 20px;
+	border-radius: 3px;
+	background: #fdcb77;
+}
+.radiobtn_categ label:before {
+	background: transparent;
+	transition: 0.1s width cubic-bezier(0.075, 0.82, 0.165, 1) 0s, 0.3s height cubic-bezier(0.075, 0.82, 0.165, 2) 0.1s;
+	z-index: 2;
+	overflow: hidden;
+	background-repeat: no-repeat;
+	background-size: 13px;
+	background-position: center;
+	width: 0;
+	height: 0;
+	background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNS4zIDEzLjIiPiAgPHBhdGggZmlsbD0iI2ZmZiIgZD0iTTE0LjcuOGwtLjQtLjRhMS43IDEuNyAwIDAgMC0yLjMuMUw1LjIgOC4yIDMgNi40YTEuNyAxLjcgMCAwIDAtMi4zLjFMLjQgN2ExLjcgMS43IDAgMCAwIC4xIDIuM2wzLjggMy41YTEuNyAxLjcgMCAwIDAgMi40LS4xTDE1IDMuMWExLjcgMS43IDAgMCAwLS4yLTIuM3oiIGRhdGEtbmFtZT0iUGZhZCA0Ii8+PC9zdmc+);
+}
+.radiobtn_categ input[type="radio"] {
+	display: none;
+	position: absolute;
+	width: 100%;
+	-webkit-appearance: none;
+	   -moz-appearance: none;
+			appearance: none;
+  }
+  .radiobtn_categ input[type="radio"]:checked + label {
+	background: #fdcb77;
+	-webkit-animation-name: blink;
+			animation-name: blink;
+	-webkit-animation-duration: 1s;
+			animation-duration: 1s;
+	border-color: #fcae2c;
+  }
+  .radiobtn_categ input[type="radio"]:checked + label:after {
+	background: #fcae2c;
+  }
+  .radiobtn_categ input[type="radio"]:checked + label:before {
+	width: 20px;
+	height: 20px;
+  }

@@ -1,0 +1,139 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"> 
+	<link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'btn_radio.css' %}">
+	<link href="https://fonts.googleapis.com/css?family=Barlow&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<br>
+	<center>
+		<img src="{% static 'sample.png' %}" alt="#" width="150px" height="150px">
+		<div></div>
+	</center>
+	
+	<br><br>
+	<div id="wrap" >
+		<div id="container">
+			<div id="sub_container">
+				<div class="steps">
+					<div class="step step1" style="height: 600px;">
+						<div class="section section1">
+							<div class="col-head">
+								MODE
+							</div>
+							<div class="col-body">
+								<div style="padding-top: 50px;">
+									<ul>
+										<li>
+											<input type="radio" name="chk_mode" id="mode1" checked />
+											<label for="mode1">MODE #1</label>
+											<div class="check"></div>
+										</li>
+										<li>
+											<input type="radio" name="chk_mode" id="mode2" />
+											<label for="mode2">MODE #2</label>
+											<div class="check"></div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="section section2">
+							<div class="col-head">
+								CATEGORY
+							</div>
+							<div class="col-body" style="overflow-y: scroll;">
+								<div class="radiobtn_categ"><input type="radio" id="categ1" name="chk_ctg" value="categ1" /><label for="categ1">categ1</label></div>
+								<div class="radiobtn_categ"><input type="radio" id="categ2" name="chk_ctg" value="categ2" /><label for="categ2">categ2</label></div>
+								<div class="radiobtn_categ"><input type="radio" id="categ3" name="chk_ctg" value="categ3" /><label for="categ3">categ3</label></div>
+								<div class="radiobtn_categ"><input type="radio" id="categ4" name="chk_ctg" value="categ4" /><label for="categ4">categ4</label></div>
+								<div class="radiobtn_categ"><input type="radio" id="categ5" name="chk_ctg" value="categ4" /><label for="categ5">categ5</label></div>
+							
+							</div>
+						</div>
+						<div class="section section_inner">
+							<div class="col-head"></div>
+							<div class="col-body">
+								<input id="option-complete" type="button" value="선택 완료"/>
+								
+							</div>
+						</div>
+						<div class="section section3">
+							<div class="col-head">
+								NEW ROOM
+							</div>
+							<div class="col-body">
+								<br/>
+								방 이름 <br>
+								<input id="room-name-input" type="text" size="15%"/><br/><br/>
+								내 이름 <br>
+								<input id="user-name-input" type="text" size="15%"/><br/>
+								<br>
+								<input id="room-name-submit" type="button" value="방 생성"/>
+								
+								<script>
+									document.querySelector('#room-name-input').focus();
+									document.querySelector('#room-name-input').onkeyup = function(e) {
+										if (e.keyCode === 13) {  // enter, return
+											document.querySelector('#room-name-submit').click();
+										}
+									};
+									document.querySelector('#user-name-input').onkeyup = function(e) {
+										if (e.keyCode === 13) {  // enter, return
+											document.querySelector('#room-name-submit').click();
+										}
+									};
+							
+									document.querySelector('#room-name-submit').onclick = function(e) {
+										var roomName = document.querySelector('#room-name-input').value;
+										var userName = document.querySelector('#user-name-input').value;
+										if(roomName == '' || userName == ''){
+											alert('빈칸 ㄴㄴ');
+											return null;
+										}
+										var g_oInterval = null;
+										var g_oWindow = window.open(
+											'/chat/' + roomName + '/' + userName + '/',
+											"", "width=740, height=700"
+										);
+									};
+								</script>
+							</div>
+						</div>
+						<div class="section section4">
+							<div class="col-head">
+								ROOM LIST
+							</div>
+							<div class="col-body" id="room_list" style="overflow-y: auto;">
+
+							</div>
+						</div>
+						<div class="foot"></div>
+						<script>
+							document.querySelector('#option-complete').onclick = function(e){
+								var _default = '<div><input class="room_elements" type="button" value="';
+								var _add = _default;//_default + 선택 완료 +'"/>';
+								for(var i=0; i<20; i++){
+									_add += '제목 ' + (i+1);
+									_add += '"/></div>\n';
+									_add += _default;
+								}
+								document.querySelector('#room_list').innerHTML = _add;
+								//_list.innerHTML = _add;
+							};
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+		
+		
+		
+		

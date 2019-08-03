@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Chat Room</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'room_css.css' %}"/>
+    <!--<script src="{% static 'room_js.js' %}"></script>-->
+</head>
+
+<body>
+    <div class="talktheme" id="talktheme_form" style="width: 700px; height: 530px;">
+        <div class="head-area"><p id="chat-head"></p></div>
+        <div class="chat-log"></div>
+            <!--<div id="chat-log" cols="100" rows="20"></div><br/>-->
+        <div class="send-area">
+            <hr>
+            <textarea id="chat-message-input" type="text" size="100"></textarea>
+            <input id="chat-message-submit" type="button" value="Send"/>
+        </div>
+    </div>
+    
+</body>
+
+<script>
+    function getTime(){
+        var date = new Date();
+	    var ampm = (date.getHours() > 12 ?  "PM" : "AM");
+	    var h = (date.getHours() > 12 ? date.getHours() - 12 : date.getHours());
+	    var m = date.getMinutes();
+        var result = ampm + " " + h + ":" + m;
+        return result;
+    }
+
+    var roomName = {{room_name_json}};
+    var myName = {{user_name}};
+    //var other = '';
+    document.querySelector('#chat-head').innerHTML = roomName;
+
+    var chatSocket = new WebSocket(
+        'ws://' + window.location.host +
+        '/ws/chat/' + roomName + '/'+ myName + '/');
+
+    chatSocket.onmessage = function(e) {
+        var data = JSON.parse(e.data);
+        var otherName = data['userName'];
+        var type = data['type'];
+        var message = data['message'];
+
+        if(type == 'chat_message' && otherName != myName){
+            var current_time = getTime();
+            var other_msg = document.createElement('div');
+            var image_path = "{% static 'profile_image.png' %}";
+            
+            other_msg.className = "othermsg";
+            other_msg.innerHTML 
+            = "<div class=\"profile_image\" style=\"background: url(" + image_path + ") no-repeat;\">\n" + "</div>\n" 
+            + "<div class=\"box\">\n" +  "<div class=\"profile_name\">\n"+	otherName + "\n" + "</div>\n" 
+            + "<div class=\"a\">\n" + "</div>\n" + "<div class=\"b\">\n" + message +"\n" + "</div>\n" 
+            + "<div class=\"time\">\n" + current_time + "\n" + "</div>\n" + "</div>\n" + "";
+
+            document.querySelector('.chat-log').appendChild(other_msg);
+            document.querySelector('.chat-log').scrollTop = document.querySelector('.chat-log').scrollHeight;
+
+            //document.querySelector('#chat-log').value += (otherName + ': ' + message + '\n');      
+            //other = otherName;
+        }
+
+        /*
+        else if(type == 'new_user')
+            document.querySelector('#chat-log').value += ("'" + message +"'님이 입장하셨습니다" + '\n');
+        *
+        else if(type == 'user_out'){
+            //document.querySelector('#chat-log').value += ("'" + userName +"'님이 퇴장하였습니다" + '\n');
+            var other_msg = document.createElement('div');
+            other_msg.className = "othermsg";
+            other_msg.innerHTML = "<div class=\"a\">\n" + "</div>\n" + "<div class=\"b\">\n" + userName +"님이 퇴장하였습니다\n" + "</div>\n";
+            document.querySelector('.chat-log').appendChild(other_msg);
+            document.querySelector('.chat-log').scrollTop = document.querySelector('.chat-log').scrollHeight;
+
+        }*/
+    };
+
+    
+    chatSocket.onclose = function(e) {
+        console.error('Chat socket closed unexpectedly');
+    };
+
+    document.querySelector('#chat-message-input').focus();
+    document.querySelector('#chat-message-input').onkeyup = function(e) {
+        if (e.keyCode === 13) {  // enter, return
+            document.querySelector('#chat-message-submit').click();
+        }
+    };
+
+    document.querySelector('#chat-message-submit').onclick = function(e) {
+        var messageInputDom = document.querySelector('#chat-message-input');
+        var message = messageInputDom.value;
+        if (message != ""){
+            chatSocket.send(JSON.stringify({
+                'userName': myName,
+                'type': 'chat_message',
+                'message': message
+            }));
+
+            var current_time = getTime();
+            var my_msg = document.createElement('div');
+            my_msg.className = 'mymsg';
+            my_msg.innerHTML 
+            = "<div class=\"b\">\n" + "</div>\n" 
+            + "<div class=\"a\">\n" + message +"\n" + "</div>\n" 
+            + "<div class=\"time\">\n"+ current_time +"\n" + "</div>\n" + "";
+
+            document.querySelector('.chat-log').appendChild(my_msg);
+            document.querySelector('.chat-log').scrollTop = document.querySelector('.chat-log').scrollHeight;
+            //document.querySelector('#chat-log').value += (myName + ': ' + message + '\n');
+        }
+        messageInputDom.value = '';
+    };
+</script>
+
+</html>
