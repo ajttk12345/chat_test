@@ -154,7 +154,7 @@ pycparser==2.18
 pycrypto==2.6.1
 pycurl==7.43.0.1
 pyflakes==1.6.0
-Pygments==2.2.0
+Pygments==2.7.4
 PyHamcrest==1.9.0
 PyInstaller==3.5.dev0+8c27d2668
 pylint==1.8.4
